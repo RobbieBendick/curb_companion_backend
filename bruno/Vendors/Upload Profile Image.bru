@@ -1,0 +1,15 @@
+meta {
+  name: Upload Profile Image
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{host}}/vendors/648535f7d0f8f167402220ef/profile-image
+  body: multipartForm
+  auth: none
+}
+
+body:form-urlencoded {
+  image: undefined
+}

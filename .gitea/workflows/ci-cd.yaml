@@ -1,0 +1,51 @@
+name: CI/CD
+run-name: ${{ gitea.actor }} build and push
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  setup_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create .env file
+        run: |
+          # Assuming 'vars' is a JSON object containing the environment variables
+          VARS_JSON='${{ toJSON(vars) }}'
+          # Convert JSON object to lines suitable for a .env file
+          echo "$VARS_JSON" | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' >> .env
+
+      - name: Login to your container registry
+        run: docker login ${{ vars.DOMAIN }} -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker compose build 
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ vars.CONTAINER_REGISTRY_IMAGE }}:${{ vars.TAG }}
+
+      - name: Setup SSH
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          sudo apt-get install -y rsync
+
+      - name: Deploy to VPS
+        run: |
+          echo "Deploying to VPS"
+          echo "${{ secrets.VPS_PASSWORD }}\n ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }}\n ${{ vars.DIR_LOCATION }}"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "mkdir -p ${{ vars.DIR_LOCATION }}"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "docker login ${{ vars.DOMAIN }} -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "cd ${{ vars.DIR_LOCATION }} && rm -rf *"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" scp -rp * ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }}:${{ vars.DIR_LOCATION }}/
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" scp .env ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }}:${{ vars.DIR_LOCATION }}/
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ vars.CONTAINER_REGISTRY_IMAGE }}:${{ vars.DOMAIN }}"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "cd ${{ vars.DIR_LOCATION }} && docker compose pull"
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_SERVER }} "cd ${{ vars.DIR_LOCATION }} && docker compose up -d --force-recreate"
+          echo "Deployed to VPS"

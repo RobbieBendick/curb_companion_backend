@@ -1,0 +1,36 @@
+meta {
+  name: Verify Tokens
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{host}}/auth/verify-tokens
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  // let authToken = pm.environment.get("access-token");
+  // let refreshToken = pm.environment.get("refresh-token");
+  // 
+  // if (authToken) {
+  //     pm.request.headers.add({key: "access-token", value: authToken});
+  // }
+  // 
+  // if (refreshToken) {
+  //     pm.request.headers.add({key: "refresh-token", value: refreshToken});
+  // }
+}
+
+tests {
+  // var accessToken = pm.response.headers.get("access-token")
+  // var refreshToken = pm.response.headers.get("refresh-token")
+  // 
+  // if (accessToken) {
+  //     pm.environment.set("access-token", accessToken);
+  // }
+  // if (refreshToken) {
+  //     pm.environment.set("refresh-token", refreshToken);
+  // }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Search Vendors
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/vendors/search?lat=28.6278&lon=-81.3631&radius=3956
+  body: none
+  auth: none
+}
+
+query {
+  lat: 28.6278
+  lon: -81.3631
+  radius: 3956
+  ~limit: 1
+  ~skip: 4
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Go Live
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{host}}/vendors/638d2d62daeae1634d1c392c/go-live
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "location": {
+          "latitude": -80,
+          "longitude": 40
+      }
+  }
+}

@@ -1,0 +1,26 @@
+meta {
+  name: Registration
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email": "curbcompanionbeta@gmail.com",
+      "password": "approveusplz123",
+      "confirmPassword": "approveusplz123",
+      "dateOfBirth": "2023-04-30T12:12:07Z",
+      "firstName": "Curb",
+      "surname": "Companion"
+  }
+}
+
+tests {
+  // 
+}

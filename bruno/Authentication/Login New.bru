@@ -1,0 +1,34 @@
+meta {
+  name: Login New
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{host}}/auth/login-new
+  body: json
+  auth: none
+}
+
+query {
+  : 
+}
+
+body:json {
+  {
+      "email": "curbcompanionbeta@gmail.com",
+      "password": "approveusplz123"
+  }
+}
+
+tests {
+  // var accessToken = pm.response.headers.get("access-token")
+  // var refreshToken = pm.response.headers.get("refresh-token")
+  // 
+  // if (accessToken) {
+  //     pm.environment.set("access-token", accessToken);
+  // }
+  // if (refreshToken) {
+  //     pm.environment.set("refresh-token", refreshToken);
+  // }
+}

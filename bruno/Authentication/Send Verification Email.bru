@@ -1,0 +1,21 @@
+meta {
+  name: Send Verification Email
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/auth/email-verification
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email": "brandongevat@gmail.com"
+  }
+}
+
+tests {
+  // 
+}

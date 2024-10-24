@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      platforms:
+        - ${VPS_OS:-linux}/${VPS_ARCH:-amd64}
+      context: .
+      dockerfile: Dockerfile
+    image: ${CONTAINER_REGISTRY_IMAGE}:${TAG}
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env
+    restart: unless-stopped

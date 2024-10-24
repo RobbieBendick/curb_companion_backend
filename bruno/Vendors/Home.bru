@@ -1,0 +1,17 @@
+meta {
+  name: Home
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{host}}/home/sections?lon=-73.99391349999999&lat=40.7292847&radius=3000
+  body: text
+  auth: none
+}
+
+query {
+  lon: -73.99391349999999
+  lat: 40.7292847
+  radius: 3000
+}

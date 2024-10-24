@@ -1,0 +1,19 @@
+meta {
+  name: create-catering-request
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/catering/create-catering-request
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test@gmail.com",
+    "subject": "test",
+    "description" "test"
+  }
+}

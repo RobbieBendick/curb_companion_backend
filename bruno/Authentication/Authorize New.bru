@@ -1,0 +1,15 @@
+meta {
+  name: Authorize New
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{host}}/auth/authorize-new
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTU5YjBlYTc5N2E3NzczNmEwNGZhNSIsImlhdCI6MTcwNjE1MjM2MywiZXhwIjoxNzA2MTU1OTYzfQ.ZBu3H6FPflxIToF_t-U1XCBOfpzq1uUOhQtVkUbETas
+}

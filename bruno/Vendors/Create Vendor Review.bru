@@ -1,0 +1,19 @@
+meta {
+  name: Create Vendor Review
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{host}}/vendors/639b3e7502897d77ba447e99/reviews
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "title": "Title boy",
+      "description": "this is a reviewawdawdawdbw",
+      "rating": 2
+  }
+}

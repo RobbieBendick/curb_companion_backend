@@ -1,0 +1,7 @@
+{
+    "client_id": "",
+    "team_id": "Q5K8ZBZT2H",
+    "key_id": "",
+    "redirect_uri": "https://127.0.0.1:3000/apple-auth",
+    "scope": "name email"
+}

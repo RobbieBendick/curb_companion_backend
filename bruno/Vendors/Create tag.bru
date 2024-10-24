@@ -1,0 +1,17 @@
+meta {
+  name: Create tag
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/tags/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "title": "Pizza"
+  }
+}

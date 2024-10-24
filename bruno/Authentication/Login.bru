@@ -1,0 +1,30 @@
+meta {
+  name: Login
+  type: http
+  seq: 4
+}
+
+post {
+  url: 
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email": "curbcompanionbeta@gmail.com",
+      "password": "approveusplz123"
+  }
+}
+
+tests {
+  // var accessToken = pm.response.headers.get("access-token")
+  // var refreshToken = pm.response.headers.get("refresh-token")
+  // 
+  // if (accessToken) {
+  //     pm.environment.set("access-token", accessToken);
+  // }
+  // if (refreshToken) {
+  //     pm.environment.set("refresh-token", refreshToken);
+  // }
+}

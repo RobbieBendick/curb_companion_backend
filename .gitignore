@@ -1,0 +1,8 @@
+# Environments
+node_modules
+.env
+.test.env
+logs/
+dist/
+coverage/
+serviceAccountKey.json

@@ -1,0 +1,17 @@
+meta {
+  name: Create Vendor
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/vendors/create
+  body: multipartForm
+  auth: none
+}
+
+body:form-urlencoded {
+  data: %7B%0A%20%20%20%20%22title%22%3A%20%22Island%20Kitchen%20%26%20Grill%22%2C%0A%20%20%20%20%22location%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22address%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22street%22%3A%20%225008%20Edgewater%20Dr%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22city%22%3A%20%22Orlando%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22state%22%3A%20%22FL%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22country%22%3A%20%22USA%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22postalCode%22%3A%20%2232810%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20%22website%22%3A%20%22https%3A%2F%2Fisland-kitchen-grill.business.site%2F%22%2C%0A%20%20%20%20%22phoneNumber%22%3A%20%224075567851%22%2C%0A%20%20%20%20%22isCatering%22%3A%20false%0A%7D
+  ~image: null
+  ~profileImage: null
+}

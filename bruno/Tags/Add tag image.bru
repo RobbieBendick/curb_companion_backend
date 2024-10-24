@@ -1,0 +1,15 @@
+meta {
+  name: Add tag image
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/tags/64af89f329f3f9a43d48e53b/image
+  body: multipartForm
+  auth: none
+}
+
+body:form-urlencoded {
+  image: undefined
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Verify Email
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/auth/email-verification/verify
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email": "kyzydiby@clout.wiki",
+      "code": "421270"
+  }
+}
+
+tests {
+  // 
+}
